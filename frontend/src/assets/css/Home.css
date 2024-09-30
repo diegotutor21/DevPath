@@ -1,0 +1,101 @@
+* {
+  line-height: 1.6;
+}
+
+h1 {
+  color: black;
+  font-size: 70px;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.contenido {
+  columns: 200px 2;
+  column-gap: 30px;
+  padding: 20px;
+}
+
+.banner {
+  background-color: #004d74;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.title {
+  column-span: all;
+  display: block;
+  font-weight: bold;
+}
+
+main {
+  text-align: justify;
+  padding: 30px;
+  width: 80%;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.logo {
+  display: flex;
+  margin: 0 auto;
+  max-width: 90%;
+  border-radius: 20px;
+}
+
+.img {
+  display: flex;
+  margin: 0 auto;
+  max-width: 90%;
+  border-radius: 20px;
+}
+
+.fb {
+  width: 90%;
+}
+
+span {
+  font-weight: bold;
+  color: #004d74;
+}
+
+.span {
+  color: #f4fefd;
+}
+
+.list {
+  list-style: none;
+  color: #f4fefd;
+}
+
+.list li::before {
+  content: "</>";
+  margin-right: 8px;
+  color: #f4fefd;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 700px) {
+  main {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    background-color: white;
+  }
+  .img {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0px;
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0px;
+  }
+
+  .banner {
+    border-radius: 0px;
+  }
+}
