@@ -1,73 +1,74 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
 
 const NavBar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("token")); // Comprueba si hay token al cargar
+  const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const navigate = useNavigate();
 
-  const handleLoginLogout = () => {
-    if (isLoggedIn) {
-      // Si el usuario está logueado, cerrar sesión
-      setIsLoggedIn(false);
+  // Función para mostrar el alert de confirmación
+  const handleLogout = () => {
+    if (window.confirm("¿Seguro quieres cerrar sesión?")) {
+      // Confirmación del cierre de sesión
       localStorage.removeItem("token");
-    } else {
-      // Redirigir al formulario de autenticación
-      navigate("/login");
+      setLoggedIn(false); // Actualiza el estado para mostrar "Iniciar sesión"
     }
   };
 
+  // Al hacer login
+  const handleLogin = () => {
+    setLoggedIn(true);
+    // Aquí puedes navegar o ejecutar una acción después del login.
+    // Ejemplo: guardar el token y cambiar la vista si es necesario
+  };
+
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-dark"
-      style={{ backgroundColor: "#032030" }}
-    >
-      <div className="container">
-        <Link className="navbar-brand" to="/">
-          {" "}
-          &lt;/&gt;DevPath{" "}
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
+    <>
+      <Navbar expand="lg" style={{ backgroundColor: "#032030" }}>
+        <Container>
+          <Navbar.Brand href="/" style={{ color: "#fff" }}>
+            DevPath
+          </Navbar.Brand>
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            style={{ borderColor: "#fff" }}
+          />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/" style={{ color: "#fff" }}>
                 Inicio
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/frontend">
+              </Nav.Link>
+              <Nav.Link href="/frontend" style={{ color: "#fff" }}>
                 Frontend
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/backend">
+              </Nav.Link>
+              <Nav.Link href="/backend" style={{ color: "#fff" }}>
                 Backend
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/foro">
+              </Nav.Link>
+              <Nav.Link href="/foro" style={{ color: "#fff" }}>
                 Foro
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/acerca-de">
+              </Nav.Link>
+              <Nav.Link href="/acerca" style={{ color: "#fff" }}>
                 Acerca de
-              </Link>
-            </li>
-          </ul>
-          <button className="btn btn-outline-light" onClick={handleLoginLogout}>
-            {isLoggedIn ? "Cerrar sesión" : "Iniciar sesión"}
-          </button>
-        </div>
-      </div>
-    </nav>
+              </Nav.Link>
+            </Nav>
+            {loggedIn ? (
+              <Button variant="outline-light" onClick={handleLogout}>
+                Cerrar sesión
+              </Button>
+            ) : (
+              <Button
+                variant="outline-light"
+                href="/login"
+                onClick={handleLogin}
+              >
+                Iniciar sesión
+              </Button>
+            )}
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
   );
 };
 

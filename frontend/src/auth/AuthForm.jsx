@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../assets/css/AutoForm.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AuthForm = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -52,63 +52,78 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div className="card p-4" style={{ maxWidth: '400px', width: '100%' }}>
         <form onSubmit={handleSubmit}>
-          <h1>{isRegistering ? "Registrarse" : "Iniciar Sesión"}</h1>
+          <h1 className="mb-3 text-center">{isRegistering ? "Registrarse" : "Iniciar Sesión"}</h1>
           {isRegistering && (
             <>
-              <input
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                placeholder="Nombre"
-                required
-              />
-              <input
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                placeholder="Apellido"
-                required
-              />
+              <div className="mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Nombre"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Apellido"
+                  required
+                />
+              </div>
             </>
           )}
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Contraseña"
-            required
-          />
-          {isRegistering && (
+          <div className="mb-3">
             <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirmar Contraseña"
+              type="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
               required
             />
+          </div>
+          <div className="mb-3">
+            <input
+              type="password"
+              className="form-control"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Contraseña"
+              required
+            />
+          </div>
+          {isRegistering && (
+            <div className="mb-3">
+              <input
+                type="password"
+                className="form-control"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirmar Contraseña"
+                required
+              />
+            </div>
           )}
-          <button type="submit">
+          <button type="submit" className="btn btn-primary w-100">
             {isRegistering ? "Registrar" : "Entrar"}
           </button>
-          <p>
+          <p className="mt-3 text-center">
             {isRegistering
               ? "¿Ya tienes una cuenta?"
               : "¿No tienes una cuenta?"}
-            <a href="#" onClick={toggleForm}>
+            <a href="#" onClick={toggleForm} className="text-primary">
               {isRegistering ? "Inicia Sesión" : "Regístrate"}
             </a>
           </p>
-          {error && <p style={{ color: "red" }}>{error}</p>}
+          {error && <p className="text-danger text-center">{error}</p>}
         </form>
       </div>
     </div>

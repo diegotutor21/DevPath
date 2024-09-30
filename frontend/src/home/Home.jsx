@@ -1,70 +1,130 @@
-import "../assets/css/Home.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { Container, Row, Col, Button, Card, Table } from "react-bootstrap";
 
 const HomePage = () => {
   return (
     <>
       <Navbar />
-      <main>
-        <img src="images/Logo1.png" className="logo" />
-        <section className="introduction">
-          <div className="contenido">
-            <p>
-              Este sitio web ha sido diseñado para ser una plataforma de
-              aprendizaje interactivo y accesible para aquellos que desean
-              adentrarse en el mundo de la programación y el desarrollo web.
-              Aquí encontrarás una estructura dividida en dos secciones
-              principales:
-              <span>Frontend</span> y <span>Backend</span>, donde exploraremos
-              las tecnologías más populares y utilizadas en cada área del
-              desarrollo.
-            </p>
-            <img className="img" src="images/codigo.webp" alt="" />
-          </div>
-          <hr />
-          <div className="contenido banner">
-            <img src="images/images.png" className="img fb" alt="" />
-            <br />
-            <ul className="list">
-              <li>
-                En la sección <span className="span">Frontend</span>,
-                descubrirás las herramientas y lenguajes que permiten construir
-                la interfaz visual con la que los usuarios interactúan.
-                Aprenderás sobre HTML, CSS, JavaScript y los frameworks más
-                usados para crear páginas web dinámicas y responsivas.
-              </li>
-              <br />
-              <li>
-                En la sección <span className="span">Backend</span>, nos
-                enfocamos en el lado servidor de las aplicaciones web. Aquí
-                conocerás tecnologías como Node.js, Express, MongoDB, entre
-                otras, que son esenciales para gestionar la lógica, la seguridad
-                y las bases de datos de cualquier proyecto.
-              </li>
-            </ul>
-          </div>
-          <hr />
-          <h2 className="title">Foro de preguntas y respuestas</h2>
-          <div className="contenido">
-            <p>
-              Este espacio está diseñado para ofrecerte una visión clara y
-              práctica de las tecnologías que forman parte del desarrollo web. A
-              través de este sitio, encontrarás información esencial sobre los
-              lenguajes, herramientas y marcos que se utilizan tanto en el
-              frontend como en el backend de las aplicaciones modernas. Nuestro
-              objetivo es simplificar el aprendizaje y proporcionar ejemplos
-              reales que te permitan entender cómo funcionan estas tecnologías
-              en conjunto.
-            </p>
-            <img
-              src="images/programador-fullstack.jpg"
-              className="img"
-              alt=""
-            />
-          </div>
-        </section>
-      </main>
+      {/* Banner Principal */}
+      <header className="bg-primary text-white text-center py-5">
+        <Container>
+          <h1 className="display-4">Bienvenido a <b>&lt;/&gt;DevPath</b></h1>
+          <p className="lead">
+            Descubre lo esencial para comenzar tu camino en el desarrollo web
+          </p>
+          <Button variant="light" size="lg" className="mt-3">
+            Explorar Tareas
+          </Button>
+        </Container>
+      </header>
+
+      {/* Secciones Destacadas */}
+      <Container className="my-5">
+        <Row>
+          <Col md={6} className="mb-4">
+            <Card className="h-100 text-center">
+              <Card.Body>
+                <Card.Title>Frontend Essentials</Card.Title>
+                <Card.Text>
+                  Aprende las bases del desarrollo frontend: HTML, CSS,
+                  JavaScript y frameworks.
+                </Card.Text>
+                <Button variant="primary">Ver más</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={6} className="mb-4">
+            <Card className="h-100 text-center">
+              <Card.Body>
+                <Card.Title>Backend Basics</Card.Title>
+                <Card.Text>
+                  Explora las tecnologías de backend: Node.js, APIs, bases de
+                  datos y más.
+                </Card.Text>
+                <Button variant="primary">Ver más</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+
+      {/* Blog con artículos educativos */}
+      <Container className="my-5">
+        <h2 className="text-center mb-4">Últimos artículos educativos</h2>
+        <Row>
+          <Col md={4} className="mb-4">
+            <Card>
+              <Card.Img variant="top" src="images/que-es-html.jpg" />
+              <Card.Body>
+                <Card.Title>¿Qué es HTML y por qué es importante?</Card.Title>
+                <Button variant="primary">Leer más</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4} className="mb-4">
+            <Card>
+              <Card.Img variant="top" src="images/react.png" />
+              <Card.Body>
+                <Card.Title>Primeros pasos con React</Card.Title>
+                <Button variant="primary">Leer más</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4} className="mb-4">
+            <Card>
+              <Card.Img variant="top" src="images/rest_api.png" />
+              <Card.Body>
+                <Card.Title>Introducción a REST APIs</Card.Title>
+                <Button variant="primary">Leer más</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+
+      {/* Ruta de Aprendizaje */}
+      <Container className="my-5">
+        <h2 className="text-center mb-4">Ruta de Aprendizaje</h2>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Etapa</th>
+              <th>Contenido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Aprender HTML y CSS</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>JavaScript</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Frameworks (React, Vue)</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Backend y APIs</td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
+
+      {/* Foro de Preguntas */}
+      <Container className="my-5">
+        <h2 className="text-center mb-4">Foro de Preguntas</h2>
+        <Row className="text-center">
+          <Col>
+            <Button variant="primary" size="lg">
+              Haz una pregunta
+            </Button>
+          </Col>
+        </Row>
+      </Container>
       <Footer />
     </>
   );
