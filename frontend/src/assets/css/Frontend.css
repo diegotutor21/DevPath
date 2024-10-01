@@ -1,0 +1,4 @@
+.tech-card:hover {
+  box-shadow: 0 5px 9px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.3s ease-in-out;
+}

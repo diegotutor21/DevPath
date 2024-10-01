@@ -1,15 +1,22 @@
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import { Container, Row, Col, Button, Card, Table } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Image,
+  Card,
+  Table,
+} from "react-bootstrap";
 
 const HomePage = () => {
   return (
     <>
-      <Navbar />
       {/* Banner Principal */}
       <header className="bg-primary text-white text-center py-5">
         <Container>
-          <h1 className="display-4">Bienvenido a <b>&lt;/&gt;DevPath</b></h1>
+          <h1 className="display-4">
+            <b>Tu ruta del desarrollo</b>
+          </h1>
           <p className="lead">
             Descubre lo esencial para comenzar tu camino en el desarrollo web
           </p>
@@ -19,32 +26,33 @@ const HomePage = () => {
         </Container>
       </header>
 
-      {/* Secciones Destacadas */}
+      {/* Texto sobre la página y logo */}
       <Container className="my-5">
-        <Row>
-          <Col md={6} className="mb-4">
-            <Card className="h-100 text-center">
-              <Card.Body>
-                <Card.Title>Frontend Essentials</Card.Title>
-                <Card.Text>
-                  Aprende las bases del desarrollo frontend: HTML, CSS,
-                  JavaScript y frameworks.
-                </Card.Text>
-                <Button variant="primary">Ver más</Button>
-              </Card.Body>
-            </Card>
+        <Row className="align-items-center">
+          <Col md={6}>
+            <p>
+              <b>DevPath</b> es tu plataforma educativa para aprender las bases
+              del desarrollo web. Aquí aprenderás sobre las tecnologías clave
+              que te permitirán convertirte en un desarrollador profesional.
+            </p>
+            <p>
+              Desde la construcción de la interfaz de usuario con las
+              tecnologías de <b>Frontend</b>, como HTML, CSS, y JavaScript,
+              hasta la gestión de la lógica y datos en el <b>Backend</b>
+              con herramientas como Node.js y bases de datos.
+            </p>
+            <p>
+              Explora ambos mundos y crea aplicaciones web completas que
+              funcionen a la perfección tanto en la parte visual como en el
+              servidor.
+            </p>
           </Col>
-          <Col md={6} className="mb-4">
-            <Card className="h-100 text-center">
-              <Card.Body>
-                <Card.Title>Backend Basics</Card.Title>
-                <Card.Text>
-                  Explora las tecnologías de backend: Node.js, APIs, bases de
-                  datos y más.
-                </Card.Text>
-                <Button variant="primary">Ver más</Button>
-              </Card.Body>
-            </Card>
+          <Col md={6}>
+            <Image
+              src="images/Logo1.png" // Asegúrate de cambiar esto por la ruta correcta del logo
+              alt="DevPath Logo"
+              fluid
+            />
           </Col>
         </Row>
       </Container>
@@ -125,7 +133,6 @@ const HomePage = () => {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </>
   );
 };

@@ -28,7 +28,7 @@ const NavBar = () => {
       <Navbar expand="lg" style={{ backgroundColor: "#032030" }}>
         <Container>
           <Navbar.Brand href="/" style={{ color: "#fff" }}>
-            DevPath
+            <b>&lt;/&gt;DevPath</b>
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
