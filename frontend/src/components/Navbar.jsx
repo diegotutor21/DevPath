@@ -1,74 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 
 const NavBar = () => {
-  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("token")); // Comprueba si hay token al cargar
-  const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false); // Estado para verificar si el usuario está logueado
   const navigate = useNavigate();
 
-  // Función para mostrar el alert de confirmación
+  // useEffect para cargar el estado del token desde localStorage cuando el componente se monta
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoggedIn(true); // Si hay token, el usuario está logueado
+    }
+  }, []); // Se ejecuta solo una vez al montar el componente
+
+  // Función para manejar el logout
   const handleLogout = () => {
     if (window.confirm("¿Seguro quieres cerrar sesión?")) {
       // Confirmación del cierre de sesión
-      localStorage.removeItem("token");
+      localStorage.removeItem("token"); // Elimina el token de localStorage
       setLoggedIn(false); // Actualiza el estado para mostrar "Iniciar sesión"
+      navigate("/"); // Redirige al home (página principal) después de cerrar sesión
     }
   };
 
-  // Al hacer login
-  const handleLogin = () => {
-    setLoggedIn(true);
-    // Aquí puedes navegar o ejecutar una acción después del login.
-    // Ejemplo: guardar el token y cambiar la vista si es necesario
-  };
-
   return (
-    <>
-      <Navbar expand="lg" style={{ backgroundColor: "#032030" }}>
-        <Container>
-          <Navbar.Brand href="/" style={{ color: "#fff" }}>
-            <b>&lt;/&gt;DevPath</b>
-          </Navbar.Brand>
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            style={{ borderColor: "#fff" }}
-          />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/" style={{ color: "#fff" }}>
-                Inicio
-              </Nav.Link>
-              <Nav.Link href="/frontend" style={{ color: "#fff" }}>
-                Frontend
-              </Nav.Link>
-              <Nav.Link href="/backend" style={{ color: "#fff" }}>
-                Backend
-              </Nav.Link>
-              <Nav.Link href="/foro" style={{ color: "#fff" }}>
-                Foro
-              </Nav.Link>
-              <Nav.Link href="/acerca" style={{ color: "#fff" }}>
-                Acerca de
-              </Nav.Link>
-            </Nav>
-            {loggedIn ? (
-              <Button variant="outline-light" onClick={handleLogout}>
-                Cerrar sesión
-              </Button>
-            ) : (
-              <Button
-                variant="outline-light"
-                href="/login"
-                onClick={handleLogin}
-              >
-                Iniciar sesión
-              </Button>
-            )}
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </>
+    <Navbar expand="lg" style={{ backgroundColor: "#032030" }}>
+      <Container>
+        <Navbar.Brand href="/" style={{ color: "#fff" }}>
+          <b>&lt;/&gt;DevPath</b>
+        </Navbar.Brand>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          style={{ borderColor: "#fff" }}
+        />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/" style={{ color: "#fff" }}>
+              Inicio
+            </Nav.Link>
+            <Nav.Link href="/frontend" style={{ color: "#fff" }}>
+              Frontend
+            </Nav.Link>
+            <Nav.Link href="/backend" style={{ color: "#fff" }}>
+              Backend
+            </Nav.Link>
+            <Nav.Link href="/code-editor" style={{ color: "#fff" }}>
+              Editor
+            </Nav.Link>
+            <Nav.Link href="/acerca" style={{ color: "#fff" }}>
+              Acerca de
+            </Nav.Link>
+          </Nav>
+          {loggedIn ? (
+            <Button variant="outline-light" onClick={handleLogout}>
+              Cerrar sesión
+            </Button>
+          ) : (
+            <Button variant="outline-light" href="/login">
+              Iniciar sesión
+            </Button>
+          )}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

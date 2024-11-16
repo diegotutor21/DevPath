@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const AuthForm = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -42,7 +42,14 @@ const AuthForm = () => {
       const result = await response.json();
       if (response.ok) {
         localStorage.setItem("token", result.token);
-        navigate("/"); // Redirigir a la página principal
+        localStorage.setItem("role", result.role); // Guardamos el rol en localStorage
+
+        // Redirigir dependiendo del rol
+        if (result.role === "admin") {
+          navigate("/admin"); // Redirige a la vista de administración si el usuario es admin
+        } else {
+          navigate("/"); // Redirige a la página principal para usuarios regulares
+        }
       } else {
         setError(result.error);
       }
@@ -51,11 +58,17 @@ const AuthForm = () => {
     }
   };
 
+  const handleGoHome = () => {
+    navigate("/"); // Redirige a la página de inicio sin iniciar sesión
+  };
+
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4" style={{ maxWidth: '400px', width: '100%' }}>
+      <div className="card p-4" style={{ maxWidth: "400px", width: "100%" }}>
         <form onSubmit={handleSubmit}>
-          <h1 className="mb-3 text-center">{isRegistering ? "Registrarse" : "Iniciar Sesión"}</h1>
+          <h1 className="mb-3 text-center">
+            {isRegistering ? "Registrarse" : "Iniciar Sesión"}
+          </h1>
           {isRegistering && (
             <>
               <div className="mb-3">
@@ -125,6 +138,9 @@ const AuthForm = () => {
           </p>
           {error && <p className="text-danger text-center">{error}</p>}
         </form>
+        <button onClick={handleGoHome} className="btn btn-secondary mt-3 w-100">
+          Volver al Home
+        </button>
       </div>
     </div>
   );
