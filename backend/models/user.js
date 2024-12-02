@@ -1,20 +1,13 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const validator = require('validator');
 
 const userSchema = new mongoose.Schema({
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        validate: [validator.isEmail, 'Email no válido'],
-    },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    recoveryCode: { type: Number, default: null },
 });
 
-// Método para encriptar la contraseña antes de guardar
+// Hashear la contraseña antes de guardar
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     const salt = await bcrypt.genSalt(10);
@@ -22,9 +15,9 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-// Comparar contraseña para login
-userSchema.methods.comparePassword = function (password) {
-    return bcrypt.compare(password, this.password);
+// Método para comparar contraseñas
+userSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
 };
 
 const User = mongoose.model('User', userSchema);

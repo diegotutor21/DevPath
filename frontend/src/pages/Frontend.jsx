@@ -22,7 +22,7 @@ const Frontend = () => {
       description:
         "Lenguaje de programación para agregar interactividad a los sitios web.",
       image: "images/js.jpg",
-      link: "/javascript",
+      link: "/js",
     },
     {
       title: "React",

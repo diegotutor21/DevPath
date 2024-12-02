@@ -1,48 +1,51 @@
 const User = require('../models/user');
-const jwt = require('jsonwebtoken');
 
-// Registrar un usuario
-exports.register = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+// Registro de usuario
+exports.registerUser = async (req, res) => {
+    const { email, password } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ error: 'El email ya está registrado' });
+            return res.status(400).json({ error: 'El correo ya está registrado' });
         }
 
-        const user = new User({ firstName, lastName, email, password });
-        await user.save();
+        const newUser = new User({ email, password });
+        await newUser.save();
 
-        // Generar token JWT
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        res.status(201).json({ token });
+        res.status(201).json({ message: 'Usuario registrado con éxito' });
     } catch (error) {
-        res.status(500).json({ error: 'Error al registrar usuario' });
+        console.error(error);
+        res.status(500).json({ error: 'Error al registrar el usuario' });
     }
 };
 
-// Login de usuario
-exports.login = async (req, res) => {
+// Inicio de sesión
+exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ error: 'Usuario no encontrado' });
+        if (!user || !(await user.matchPassword(password))) {
+            return res.status(401).json({ error: 'Credenciales incorrectas' });
         }
 
-        const isMatch = await user.comparePassword(password);
-        if (!isMatch) {
-            return res.status(400).json({ error: 'Contraseña incorrecta' });
-        }
-
-        // Generar token JWT
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        res.status(200).json({ token });
+        // Simulación de una sesión
+        req.session.user = { id: user._id, email: user.email };
+        res.json({ message: 'Inicio de sesión exitoso', user: { id: user._id, email: user.email } });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Error al iniciar sesión' });
     }
+};
+
+// Cerrar sesión
+exports.logoutUser = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Error al cerrar sesión' });
+        }
+        res.json({ message: 'Sesión cerrada con éxito' });
+    });
 };

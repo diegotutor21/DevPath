@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CodeEditor = () => {
@@ -11,43 +11,52 @@ const CodeEditor = () => {
   <title>Document</title>
   <style>
     /* Puedes agregar tus estilos CSS aquí */
-  
   </style>
 </head>
 <body>
-  
+  <!-- Escribe tu código HTML aquí -->
 </body>
 </html>`;
 
-  const [code, setCode] = useState(initialHTML);
-  const [output, setOutput] = useState(initialHTML);
+  // Obtén el código del ejemplo de localStorage o usa el inicial
+  const [code, setCode] = useState(
+    localStorage.getItem("exampleCode") || initialHTML
+  );
+  const [output, setOutput] = useState(code);
 
   // Función para ejecutar el código ingresado
   const runCode = () => {
     setOutput(code); // Actualiza el estado que controla el contenido del iframe
   };
 
+  // Limpia el localStorage después de cargar el código
+  useEffect(() => {
+    const exampleCode = localStorage.getItem("exampleCode");
+    if (exampleCode) {
+      setCode(exampleCode);
+    }
+    localStorage.removeItem("exampleCode");
+  }, []);
+
   return (
     <div className="container-fluid my-4">
-      <h1 className="text-center mb-4">Editor de Código Simple en React</h1>
+      <h1 className="text-center mb-4 text-primary">
+        Prueba de código HTML / CSS
+      </h1>
 
       <div className="row">
         {/* Área para el editor de código */}
         <div className="col-md-6">
-          <div className="d-flex justify-content-between align-items-center mb-2">
-            <h2>Editor</h2>
-            <button
-              className="btn"
-              style={{ backgroundColor: "#0C68EE", color: "#ffffff" }}
-              onClick={runCode}
-            >
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h3>Editor</h3>
+            <button className="btn btn-primary" onClick={runCode}>
               Ejecutar
             </button>
           </div>
           <textarea
             className="form-control"
             style={{
-              height: "80vh",
+              height: "75vh",
               fontFamily: "monospace",
               fontSize: "14px",
               whiteSpace: "pre",
@@ -59,13 +68,16 @@ const CodeEditor = () => {
 
         {/* Área de visualización del resultado */}
         <div className="col-md-6">
-          <h2>Resultado</h2>
-          <div className="output-container border" style={{ height: "80vh" }}>
+          <h3>Resultado</h3>
+          <div
+            className="output-container border bg-light"
+            style={{ height: "75vh" }}
+          >
             <iframe
               className="w-100 h-100"
-              sandbox="allow-scripts allow-modals" // Ajuste del sandbox
+              sandbox="allow-scripts allow-modals"
               title="Resultado"
-              srcDoc={output} // Usando srcDoc para el contenido del iframe
+              srcDoc={output}
             ></iframe>
           </div>
         </div>

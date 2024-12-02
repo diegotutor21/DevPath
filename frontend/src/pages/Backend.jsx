@@ -8,21 +8,21 @@ const Backend = () => {
       description:
         "Entorno de ejecución para JavaScript en el servidor, que permite construir aplicaciones escalables y rápidas, ideal para aplicaciones en tiempo real.",
       image: "images/nodejs.png",
-      link: "/nodejs",
+      link: "/node",
     },
     {
       title: "Express.js",
       description:
         "Framework web minimalista para Node.js que simplifica la creación de APIs y aplicaciones web, facilitando el manejo de rutas y solicitudes HTTP.",
       image: "images/express.png",
-      link: "/expressjs",
+      link: "/express",
     },
     {
       title: "MongoDB",
       description:
         "Base de datos NoSQL orientada a documentos, ideal para aplicaciones que manejan grandes volúmenes de datos no estructurados o semiestructurados.",
       image: "images/mongodb.png",
-      link: "/mongodb",
+      link: "/mongo",
     },
     {
       title: "MySQL",

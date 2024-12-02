@@ -10,7 +10,10 @@ const AuthForm = () => {
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
@@ -19,17 +22,31 @@ const AuthForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (!validateEmail(email)) {
+      setError("El formato del correo es inválido.");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("La contraseña debe tener al menos 8 caracteres.");
+      return;
+    }
+
     if (isRegistering && password !== confirmPassword) {
       setError("Las contraseñas no coinciden.");
       return;
     }
+
+    setIsLoading(true);
 
     const url = isRegistering
       ? "http://localhost:3001/api/users/register"
       : "http://localhost:3001/api/users/login";
 
     const data = isRegistering
-      ? { firstName, lastName, email, password }
+      ? { name: `${firstName} ${lastName}`, email, password }
       : { email, password };
 
     try {
@@ -42,24 +59,27 @@ const AuthForm = () => {
       const result = await response.json();
       if (response.ok) {
         localStorage.setItem("token", result.token);
-        localStorage.setItem("role", result.role); // Guardamos el rol en localStorage
+        localStorage.setItem("role", result.role);
 
         // Redirigir dependiendo del rol
+        setIsLoading(false);
         if (result.role === "admin") {
-          navigate("/admin"); // Redirige a la vista de administración si el usuario es admin
+          navigate("/admin");
         } else {
-          navigate("/"); // Redirige a la página principal para usuarios regulares
+          navigate("/");
         }
       } else {
-        setError(result.error);
+        setError(result.message || "Ocurrió un error.");
       }
     } catch (err) {
-      setError("Ocurrió un error al procesar la solicitud.");
+      setError("Error al procesar la solicitud.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleGoHome = () => {
-    navigate("/"); // Redirige a la página de inicio sin iniciar sesión
+    navigate("/");
   };
 
   return (
@@ -72,8 +92,10 @@ const AuthForm = () => {
           {isRegistering && (
             <>
               <div className="mb-3">
+                <label htmlFor="firstName">Nombre</label>
                 <input
                   type="text"
+                  id="firstName"
                   className="form-control"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -82,8 +104,10 @@ const AuthForm = () => {
                 />
               </div>
               <div className="mb-3">
+                <label htmlFor="lastName">Apellido</label>
                 <input
                   type="text"
+                  id="lastName"
                   className="form-control"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
@@ -94,8 +118,10 @@ const AuthForm = () => {
             </>
           )}
           <div className="mb-3">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
+              id="email"
               className="form-control"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -104,8 +130,10 @@ const AuthForm = () => {
             />
           </div>
           <div className="mb-3">
+            <label htmlFor="password">Contraseña</label>
             <input
               type="password"
+              id="password"
               className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -115,8 +143,10 @@ const AuthForm = () => {
           </div>
           {isRegistering && (
             <div className="mb-3">
+              <label htmlFor="confirmPassword">Confirmar Contraseña</label>
               <input
                 type="password"
+                id="confirmPassword"
                 className="form-control"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -125,20 +155,34 @@ const AuthForm = () => {
               />
             </div>
           )}
-          <button type="submit" className="btn btn-primary w-100">
-            {isRegistering ? "Registrar" : "Entrar"}
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            disabled={isLoading}
+          >
+            {isLoading ? "Cargando..." : isRegistering ? "Registrar" : "Entrar"}
           </button>
           <p className="mt-3 text-center">
             {isRegistering
               ? "¿Ya tienes una cuenta?"
               : "¿No tienes una cuenta?"}
-            <a href="#" onClick={toggleForm} className="text-primary">
+            <button
+              type="button"
+              onClick={toggleForm}
+              className="btn btn-link p-0"
+            >
               {isRegistering ? "Inicia Sesión" : "Regístrate"}
-            </a>
+            </button>
           </p>
           {error && <p className="text-danger text-center">{error}</p>}
         </form>
-        <button onClick={handleGoHome} className="btn btn-secondary mt-3 w-100">
+        <a href="/recuperar" className="d-block text-center mt-2">
+          ¿Olvidaste tu contraseña?
+        </a>
+        <button
+          onClick={handleGoHome}
+          className="btn btn-secondary mt-3 w-100"
+        >
           Volver al Home
         </button>
       </div>
