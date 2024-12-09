@@ -8,6 +8,8 @@ const cors = require('cors');
 const userRouter = require('./routers/user'); // Ruta de autenticación y gestión de usuarios
 const recuperarRouter = require('./routers/recuperar'); // Ruta de recuperación de contraseñas
 const adminRouter = require('./routers/admin'); // Ruta de administración
+const tokenRouter = require("./routers/token");
+
 
 const app = express();
 
@@ -30,9 +32,11 @@ mongoose.connect(process.env.MONGO_URI)
     });
 
 // Rutas de la API
-app.use('/api/users', userRouter); // Ruta para usuarios
-app.use('/api/recuperar', recuperarRouter); // Ruta para recuperación de contraseñas
-app.use('/api/admins', adminRouter); // Ruta para administradores
+app.use("/api/users", userRouter); // Rutas para gestión de usuarios
+app.use("/api/recuperar", recuperarRouter); // Rutas para recuperación de contraseñas
+app.use("/api/admins", adminRouter); // Rutas para funciones administrativas
+app.use("/api/tokens", tokenRouter); // Rutas para gestión de tokens
+
 
 // Inicio del servidor
 const PORT = process.env.PORT || 5000;

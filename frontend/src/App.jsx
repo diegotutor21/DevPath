@@ -7,6 +7,7 @@ import {
 import Home from "./home/Home";
 import AuthForm from "./auth/LoginRegister";
 import Recuperar from "./auth/Recuperar";
+import UserList from "./pages/ListaPage";
 import Frontend from "./pages/Frontend";
 import HTML from "./pages/HTML";
 import CSS from "./pages/CSS";
@@ -41,6 +42,7 @@ function Layout() {
         <Route path="/recuperar" element={<Recuperar />} />
         <Route path="/frontend" element={<Frontend />} />
         <Route path="/code-editor" element={<CodeEditor />} />
+        <Route path="/user-list" element={<UserList />} />
         <Route path="/html" element={<HTML />} />
         <Route path="/css" element={<CSS />} />
         <Route path="/js" element={<JS />} />

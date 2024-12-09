@@ -61,15 +61,10 @@ const AuthForm = () => {
         localStorage.setItem("token", result.token);
         localStorage.setItem("role", result.role);
 
-        // Redirigir dependiendo del rol
         setIsLoading(false);
-        if (result.role === "admin") {
-          navigate("/admin");
-        } else {
-          navigate("/");
-        }
+        navigate(result.role === "admin" ? "/admin" : "/");
       } else {
-        setError(result.message || "Ocurrió un error.");
+        setError(result.message || "Email o contraseña incorrectos.");
       }
     } catch (err) {
       setError("Error al procesar la solicitud.");
@@ -78,13 +73,14 @@ const AuthForm = () => {
     }
   };
 
-  const handleGoHome = () => {
-    navigate("/");
-  };
+  const handleGoHome = () => navigate("/");
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4" style={{ maxWidth: "400px", width: "100%" }}>
+      <div
+        className="card p-4 shadow"
+        style={{ maxWidth: "400px", width: "100%" }}
+      >
         <form onSubmit={handleSubmit}>
           <h1 className="mb-3 text-center">
             {isRegistering ? "Registrarse" : "Iniciar Sesión"}
@@ -179,10 +175,7 @@ const AuthForm = () => {
         <a href="/recuperar" className="d-block text-center mt-2">
           ¿Olvidaste tu contraseña?
         </a>
-        <button
-          onClick={handleGoHome}
-          className="btn btn-secondary mt-3 w-100"
-        >
+        <button onClick={handleGoHome} className="btn btn-secondary mt-3 w-100">
           Volver al Home
         </button>
       </div>

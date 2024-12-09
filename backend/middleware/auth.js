@@ -8,8 +8,8 @@ exports.verifyToken = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded; // Guarda los datos del usuario en la request
+        const decoded = jwt.verify(token, process.env.JWT_SECRET); // Usa la misma clave secreta
+        req.user = decoded; // Almacena los datos decodificados en `req.user`
         next();
     } catch (error) {
         res.status(403).json({ error: "Token inválido" });
@@ -18,7 +18,7 @@ exports.verifyToken = (req, res, next) => {
 
 // Verificar si el usuario es administrador
 exports.isAdmin = (req, res, next) => {
-    if (req.user.role !== "admin") {
+    if (!req.user || req.user.role !== "admin") {
         return res.status(403).json({ error: "Acceso denegado. Solo administradores." });
     }
     next();

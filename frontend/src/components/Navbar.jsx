@@ -1,26 +1,43 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { decodeToken } from "../utils/decodeToken"; // Ajusta la ruta según la ubicación del archivo
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 
 const NavBar = () => {
-  const [loggedIn, setLoggedIn] = useState(false); // Estado para verificar si el usuario está logueado
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
-  // useEffect para cargar el estado del token desde localStorage cuando el componente se monta
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setLoggedIn(true); // Si hay token, el usuario está logueado
-    }
-  }, []); // Se ejecuta solo una vez al montar el componente
+      const decoded = decodeToken(token);
+      if (decoded) {
+        const { role, exp } = decoded;
 
-  // Función para manejar el logout
+        // Verifica si el token ha expirado
+        if (Date.now() >= exp * 1000) {
+          localStorage.clear();
+          setLoggedIn(false);
+          setIsAdmin(false);
+          alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.");
+          navigate("/login");
+        } else {
+          setLoggedIn(true);
+          setIsAdmin(role === "admin");
+        }
+      } else {
+        localStorage.clear();
+      }
+    }
+  }, [navigate]);
+
   const handleLogout = () => {
     if (window.confirm("¿Seguro quieres cerrar sesión?")) {
-      // Confirmación del cierre de sesión
-      localStorage.removeItem("token"); // Elimina el token de localStorage
-      setLoggedIn(false); // Actualiza el estado para mostrar "Iniciar sesión"
-      navigate("/"); // Redirige al home (página principal) después de cerrar sesión
+      localStorage.clear();
+      setLoggedIn(false);
+      setIsAdmin(false);
+      navigate("/");
     }
   };
 
@@ -30,10 +47,7 @@ const NavBar = () => {
         <Navbar.Brand href="/" style={{ color: "#fff" }}>
           <b>&lt;/&gt;DevPath</b>
         </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          style={{ borderColor: "#fff" }}
-        />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/" style={{ color: "#fff" }}>
@@ -51,6 +65,11 @@ const NavBar = () => {
             <Nav.Link href="/acerca" style={{ color: "#fff" }}>
               Acerca de
             </Nav.Link>
+            {isAdmin && (
+              <Nav.Link href="/user-list" style={{ color: "#fff" }}>
+                Lista de usuarios
+              </Nav.Link>
+            )}
           </Nav>
           {loggedIn ? (
             <Button variant="outline-light" onClick={handleLogout}>
