@@ -1,6 +1,3 @@
-# Ignorar archivos de entorno
-.env
-
 # Logs
 logs
 *.log

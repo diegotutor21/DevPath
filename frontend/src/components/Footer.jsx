@@ -2,8 +2,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import {
   FaFacebook,
   FaInstagram,
-  FaYoutube,
   FaTwitter,
+  FaGithub,
   FaMapMarkerAlt,
   FaPhone,
   FaEnvelope,
@@ -38,20 +38,20 @@ const Footer = () => {
                 <FaInstagram size={20} className="hover-icon" />
               </a>
               <a
-                href="https://www.youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="me-3 text-white"
-              >
-                <FaYoutube size={20} className="hover-icon" />
-              </a>
-              <a
-                href="https://www.twitter.com"
+                href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="me-3 text-white"
               >
                 <FaTwitter size={20} className="hover-icon" />
+              </a>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="me-3 text-white"
+              >
+                <FaGithub size={20} className="hover-icon" />
               </a>
             </div>
           </Col>
@@ -62,18 +62,12 @@ const Footer = () => {
             </h5>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <a
-                  href="/servicios"
-                  className="text-white text-decoration-none"
-                >
+                <a href="/servicios" className="text-white text-decoration-none">
                   Servicios
                 </a>
               </li>
               <li className="mb-2">
-                <a
-                  href="/proyectos"
-                  className="text-white text-decoration-none"
-                >
+                <a href="/proyectos" className="text-white text-decoration-none">
                   Proyectos
                 </a>
               </li>
@@ -115,10 +109,7 @@ const Footer = () => {
           <Col md={5} lg={4}>
             <ul className="list-inline text-md-end mb-0">
               <li className="list-inline-item">
-                <a
-                  href="/privacidad"
-                  className="text-white text-decoration-none"
-                >
+                <a href="/privacidad" className="text-white text-decoration-none">
                   Privacidad
                 </a>
               </li>

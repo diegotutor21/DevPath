@@ -8,7 +8,7 @@ const Backend = () => {
       description:
         "Entorno de ejecución para JavaScript en el servidor, ideal para construir aplicaciones escalables.",
       image: "images/nodejs.jpg",
-      link: "/nodejs",
+      link: "/node",
     },
     {
       title: "Express.js",

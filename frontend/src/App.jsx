@@ -20,6 +20,8 @@ import AdminPanel from "./pages/AdminPanel";
 import HTML from "./pages/HTML";
 import CSS from "./pages/CSS";
 import JS from "./pages/JS";
+import Node from "./pages/Node";
+import Express from "./pages/Express";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -56,6 +58,8 @@ function MainContent() {
           <Route path="/html" element={<HTML />} />
           <Route path="/css" element={<CSS />} />
           <Route path="/js" element={<JS />} />
+          <Route path="/node" element={<Node />} />
+          <Route path="/express" element={<Express />} />
           <Route
             path="/admin"
             element={isAdmin ? <AdminPanel /> : <Navigate to="/" />}
