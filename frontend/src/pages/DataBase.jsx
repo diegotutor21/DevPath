@@ -8,7 +8,7 @@ const Database = () => {
       description:
         "Base de datos NoSQL orientada a documentos, ideal para aplicaciones que requieren escalabilidad y flexibilidad en el esquema de datos.",
       image: "images/mongodb.png",
-      link: "/mongodb",
+      link: "/mongo",
     },
     {
       title: "MySQL",

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import CodeEditor from "../pages/Editor";
 import htmlExamples from "../examples/html";
 
@@ -25,6 +26,13 @@ const HTMLBasics = () => {
               <p className="lead">
                 El lenguaje fundamental para estructurar el contenido web
               </p>
+              {/* Botón para ir a tareas prácticas */}
+              <Link to="/html-practice">
+                <Button variant="light" className="mt-3">
+                  <i className="bi bi-code-slash me-2"></i>
+                  Practicar HTML
+                </Button>
+              </Link>
             </Col>
             <Col md={6} className="text-center">
               <img
@@ -295,6 +303,23 @@ const HTMLBasics = () => {
               </Card>
             </Col>
           </Row>
+        </Container>
+      </div>
+
+      {/* Sección de llamada a la acción para ir a las tareas prácticas */}
+      <div style={{ backgroundColor: "#E44D26" }} className="text-white py-4">
+        <Container className="text-center">
+          <h2 className="mb-3">¿Listo para poner en práctica lo aprendido?</h2>
+          <p className="mb-4">
+            Completa las tareas prácticas para reforzar tus conocimientos de
+            HTML
+          </p>
+          <Link to="/htmlpractice">
+            <Button variant="light" size="lg">
+              <i className="bi bi-code-slash me-2"></i>
+              Ir a las Tareas Prácticas
+            </Button>
+          </Link>
         </Container>
       </div>
     </div>

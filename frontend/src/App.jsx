@@ -18,10 +18,13 @@ import Editor from "./pages/Editor";
 import About from "./pages/AboutMe";
 import AdminPanel from "./pages/AdminPanel";
 import HTML from "./pages/HTML";
+import PracticeHTML from "./components/HTMLPracticeTasks";
 import CSS from "./pages/CSS";
 import JS from "./pages/JS";
 import Node from "./pages/Node";
 import Express from "./pages/Express";
+import Mongo from "./pages/Mongo";
+import ScrollToTop from "./components/ScrollToTop"; // Importa el componente
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -56,10 +59,12 @@ function MainContent() {
           <Route path="/editor" element={<Editor />} />
           <Route path="/about" element={<About />} />
           <Route path="/html" element={<HTML />} />
+          <Route path="/htmlpractice" element={<PracticeHTML />} />
           <Route path="/css" element={<CSS />} />
           <Route path="/js" element={<JS />} />
           <Route path="/node" element={<Node />} />
           <Route path="/express" element={<Express />} />
+          <Route path="/mongo" element={<Mongo />} />
           <Route
             path="/admin"
             element={isAdmin ? <AdminPanel /> : <Navigate to="/" />}
@@ -67,6 +72,8 @@ function MainContent() {
         </Routes>
       </div>
       {!hideNavFooter && <Footer />}
+      {!hideNavFooter && <ScrollToTop />}{" "}
+      {/* Agrega el componente ScrollToTop */}
     </>
   );
 }
