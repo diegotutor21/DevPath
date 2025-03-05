@@ -58,27 +58,27 @@ const Footer = () => {
 
           <Col lg={4} md={6} className="mb-4 mb-md-0">
             <h5 className="text-uppercase mb-4 font-weight-bold">
-              Enlaces Útiles
+              Accesos directos
             </h5>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <a href="/servicios" className="text-white text-decoration-none">
-                  Servicios
+                <a href="/frontend" className="text-white text-decoration-none">
+                  Frontend
                 </a>
               </li>
               <li className="mb-2">
-                <a href="/proyectos" className="text-white text-decoration-none">
-                  Proyectos
+                <a href="/backend" className="text-white text-decoration-none">
+                  Backend
                 </a>
               </li>
               <li className="mb-2">
-                <a href="/blog" className="text-white text-decoration-none">
-                  Blog
+                <a href="/database" className="text-white text-decoration-none">
+                  Base de Datos
                 </a>
               </li>
               <li className="mb-2">
-                <a href="/contacto" className="text-white text-decoration-none">
-                  Contacto
+                <a href="/herramientas" className="text-white text-decoration-none">
+                  Herramientas
                 </a>
               </li>
             </ul>

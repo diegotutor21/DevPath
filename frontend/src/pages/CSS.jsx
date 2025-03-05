@@ -18,7 +18,7 @@ const CSSBasics = () => {
   return (
     <div className="css-basics-page">
       {/* Hero Section */}
-      <div style={{ backgroundColor: "#264de4" }} className="text-white py-5">
+      <div style={{ backgroundColor: "#1471b6" }} className="text-white py-5">
         <Container>
           <Row className="align-items-center">
             <Col md={6}>
@@ -38,6 +38,73 @@ const CSSBasics = () => {
           </Row>
         </Container>
       </div>
+
+      <Container className="py-5">
+        {/* Introducción a CSS */}
+        <section className="mb-5">
+          <h2 className="border-bottom border-primary pb-2 mb-4">
+            ¿Qué es CSS?
+          </h2>
+          <div className="bg-light p-4 rounded-3 mb-4">
+            <p>
+              <strong>CSS (Cascading Style Sheets)</strong> es el lenguaje
+              estándar utilizado para definir la presentación y el aspecto
+              visual de las páginas web. Es fundamental para el diseño de
+              cualquier sitio web moderno.
+            </p>
+
+            <h5 className="mt-4 font-bold">Características principales:</h5>
+            <ul className="list-disc pl-5 mb-4">
+              <li>
+                Es un lenguaje de hojas de estilo, no un lenguaje de
+                programación
+              </li>
+              <li>
+                Utiliza selectores y declaraciones para definir el aspecto
+                visual de los elementos
+              </li>
+              <li>
+                Los navegadores aplican los estilos CSS para mostrar el
+                contenido con formato al usuario
+              </li>
+              <li>
+                Es el estándar oficial para el diseño de páginas web, mantenido
+                por el W3C
+              </li>
+            </ul>
+
+            <h5 className="mt-4 font-bold">Para qué se utiliza:</h5>
+            <ul className="list-disc pl-5 mb-4">
+              <li>
+                Definir colores, tamaños, fuentes y espaciados en páginas web
+              </li>
+              <li>
+                Crear diseños responsivos que se adapten a diferentes
+                dispositivos
+              </li>
+              <li>
+                Controlar la disposición y posicionamiento de los elementos
+              </li>
+              <li>Añadir animaciones y efectos visuales</li>
+              <li>
+                Personalizar la apariencia de los elementos HTML sin modificar
+                su estructura
+              </li>
+            </ul>
+
+            <div className="bg-white p-3 rounded border border-gray-300 mt-4">
+              <p className="font-semibold mb-2">Dato importante:</p>
+              <p className="mb-0">
+                CSS trabaja junto con HTML (para la estructura) y JavaScript
+                (para la interactividad) para crear experiencias web completas.
+                Mientras HTML se encarga del contenido, CSS se ocupa de toda la
+                parte visual y de presentación, permitiendo crear sitios web
+                atractivos y profesionales.
+              </p>
+            </div>
+          </div>
+        </section>
+      </Container>
 
       {/* Sección de Conceptos Básicos */}
       <Container className="py-5">

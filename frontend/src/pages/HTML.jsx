@@ -26,13 +26,6 @@ const HTMLBasics = () => {
               <p className="lead">
                 El lenguaje fundamental para estructurar el contenido web
               </p>
-              {/* Botón para ir a tareas prácticas */}
-              <Link to="/html-practice">
-                <Button variant="light" className="mt-3">
-                  <i className="bi bi-code-slash me-2"></i>
-                  Practicar HTML
-                </Button>
-              </Link>
             </Col>
             <Col md={6} className="text-center">
               <img
@@ -44,6 +37,64 @@ const HTMLBasics = () => {
           </Row>
         </Container>
       </div>
+
+      {/* Sección de Conceptos Básicos */}
+      <Container className="py-5">
+        {/* Introducción a HTML */}
+        <section className="mb-5">
+          <h2 className="border-bottom border-primary pb-2 mb-4">¿Qué es HTML?</h2>
+          <div className="bg-light p-4 rounded-3 mb-4">
+            <p>
+              <strong>HTML (HyperText Markup Language)</strong> es el lenguaje
+              estándar utilizado para crear y estructurar el contenido en la
+              web. Es el bloque fundamental de cualquier página web.
+            </p>
+
+            <h5 className="mt-4 font-bold">Características principales:</h5>
+            <ul className="list-disc pl-5 mb-4">
+              <li>Es un lenguaje de marcado, no un lenguaje de programación</li>
+              <li>
+                Utiliza elementos o etiquetas para definir la estructura y el
+                contenido
+              </li>
+              <li>
+                Los navegadores interpretan el HTML para mostrar el contenido al
+                usuario
+              </li>
+              <li>
+                Es el estándar oficial para la creación de páginas web,
+                mantenido por el W3C
+              </li>
+            </ul>
+
+            <h5 className="mt-4 font-bold">Para qué se utiliza:</h5>
+            <ul className="list-disc pl-5 mb-4">
+              <li>Crear la estructura básica de páginas web</li>
+              <li>
+                Organizar contenido como texto, imágenes, videos y formularios
+              </li>
+              <li>
+                Definir la jerarquía y relación entre diferentes contenidos
+              </li>
+              <li>Establecer enlaces entre páginas (hipertexto)</li>
+              <li>
+                Proporcionar una base para aplicar estilos (CSS) y funcionalidad
+                (JavaScript)
+              </li>
+            </ul>
+
+            <div className="bg-white p-3 rounded border border-gray-300 mt-4">
+              <p className="font-semibold mb-2">Dato importante:</p>
+              <p className="mb-0">
+                HTML trabaja junto con CSS (para el diseño visual) y JavaScript
+                (para la interactividad) para crear experiencias web completas.
+                Mientras HTML se encarga de la estructura, estos otros lenguajes
+                complementan para crear sitios web modernos y funcionales.
+              </p>
+            </div>
+          </div>
+        </section>
+      </Container>
 
       {/* Sección de Conceptos Básicos */}
       <Container className="py-5">

@@ -37,6 +37,69 @@ const JavaScriptBasics = () => {
         </Container>
       </div>
 
+      <Container className="py-5">
+        {/* Introducción a JavaScript */}
+        <section className="mb-5">
+          <h2 className="border-bottom border-warning pb-2 mb-4">
+            ¿Qué es JavaScript?
+          </h2>
+          <div className="bg-light p-4 rounded-3 mb-4">
+            <p>
+              <strong>JavaScript (JS)</strong> es el lenguaje de programación
+              estándar utilizado para crear interactividad en páginas web. Es
+              esencial para desarrollar aplicaciones web dinámicas y
+              funcionales.
+            </p>
+
+            <h5 className="mt-4 font-bold">Características principales:</h5>
+            <ul className="list-disc pl-5 mb-4">
+              <li>
+                Es un lenguaje de programación completo, orientado a objetos y
+                basado en prototipos
+              </li>
+              <li>
+                Se ejecuta en el navegador del cliente, permitiendo modificar el
+                contenido en tiempo real
+              </li>
+              <li>
+                Es interpretado (no necesita compilación) y de tipado dinámico
+              </li>
+              <li>
+                Soporta programación funcional, orientada a objetos y basada en
+                eventos
+              </li>
+            </ul>
+
+            <h5 className="mt-4 font-bold">Para qué se utiliza:</h5>
+            <ul className="list-disc pl-5 mb-4">
+              <li>Crear interactividad y responder a acciones del usuario</li>
+              <li>
+                Manipular el contenido y estructura de la página dinámicamente
+              </li>
+              <li>Realizar peticiones asíncronas a servidores (AJAX)</li>
+              <li>Validar formularios y procesar datos</li>
+              <li>
+                Desarrollar aplicaciones web complejas, juegos y experiencias
+                interactivas
+              </li>
+            </ul>
+
+            <div className="bg-white p-3 rounded border border-gray-300 mt-4">
+              <p className="font-semibold mb-2">Dato importante:</p>
+              <p className="mb-0">
+                JavaScript trabaja junto con HTML (para la estructura) y CSS
+                (para el diseño visual) para crear experiencias web completas.
+                Mientras HTML proporciona el contenido y CSS el aspecto,
+                JavaScript añade comportamiento e interactividad, permitiendo
+                crear aplicaciones web modernas y dinámicas. Hoy en día,
+                JavaScript también se utiliza en desarrollo de servidores
+                (Node.js), aplicaciones móviles y de escritorio.
+              </p>
+            </div>
+          </div>
+        </section>
+      </Container>
+
       {/* Sección de Conceptos Básicos */}
       <Container className="py-5">
         {/* Introducción a JavaScript */}
@@ -48,8 +111,8 @@ const JavaScriptBasics = () => {
             <p>JavaScript se puede incluir en HTML de tres formas:</p>
             <ul>
               <li>
-                <strong>Script interno:</strong> Directamente en el HTML usando la
-                etiqueta &lt;script&gt;
+                <strong>Script interno:</strong> Directamente en el HTML usando
+                la etiqueta &lt;script&gt;
               </li>
               <li>
                 <strong>Script externo:</strong> En un archivo .js separado
