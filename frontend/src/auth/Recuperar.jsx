@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Recuperar = () => {
@@ -43,7 +45,13 @@ const Recuperar = () => {
       const result = await response.json();
       if (response.ok) {
         // El backend nos devuelve el código directamente
-        alert(`Tu código de recuperación es: ${result.codigo}`);
+        Swal.fire({
+          title: "Código Enviado",
+          text: `Tu código de recuperación es: ${result.codigo}`,
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
+
         setCodigo(result.codigo);
         setStep(2);
       } else {
@@ -84,7 +92,12 @@ const Recuperar = () => {
 
       const result = await response.json();
       if (response.ok) {
-        alert("Contraseña actualizada exitosamente");
+        Swal.fire({
+          title: "Contraseña Restablecida",
+          text: `Tu contraseña ha sido restablecida correctamente`,
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
         navigate("/login");
       } else {
         setError(result.mensaje || "Error al cambiar la contraseña");

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,12 +24,20 @@ const NavBar = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    if (window.confirm("¿Seguro quieres cerrar sesión?")) {
-      localStorage.clear();
-      setLoggedIn(false);
-      setIsAdmin(false);
-      navigate("/");
-    }
+    Swal.fire({
+      title: "Cerrar sesión",
+      text: `¿Deseas cerrar sesión?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+    }).then((result) => {
+      if (result.value) {
+        localStorage.clear();
+        setLoggedIn(false);
+        setIsAdmin(false);
+        navigate("/");
+      }
+    });
   };
 
   const isActiveRoute = (path) => {

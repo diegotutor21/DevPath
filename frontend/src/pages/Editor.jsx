@@ -26,9 +26,24 @@ const Editor = ({ initialCode }) => {
   const [code, setCode] = useState(initialCode || defaultHTML);
   const [output, setOutput] = useState(code);
   const [isEditing, setIsEditing] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Verificar autenticación
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+    setIsAuthenticated(!!userInfo);
+  }, []);
 
   const runCode = () => {
-    setOutput(code);
+    if (isAuthenticated) {
+      setOutput(code);
+    }
+  };
+
+  const toggleEditing = () => {
+    if (isAuthenticated) {
+      setIsEditing(!isEditing);
+    }
   };
 
   useEffect(() => {
@@ -50,13 +65,22 @@ const Editor = ({ initialCode }) => {
             <h3>Editor</h3>
             <div>
               <button
-                className="btn btn-secondary me-2"
-                onClick={() => setIsEditing(!isEditing)}
+                className={`btn btn-secondary me-2 ${
+                  !isAuthenticated ? "disabled" : ""
+                }`}
+                onClick={toggleEditing}
+                disabled={!isAuthenticated}
               >
                 {isEditing ? "Vista Previa" : "Editar"}
               </button>
               {isEditing && (
-                <button className="btn btn-primary" onClick={runCode}>
+                <button
+                  className={`btn btn-primary ${
+                    !isAuthenticated ? "disabled" : ""
+                  }`}
+                  onClick={runCode}
+                  disabled={!isAuthenticated}
+                >
                   Ejecutar
                 </button>
               )}
@@ -73,6 +97,7 @@ const Editor = ({ initialCode }) => {
               }}
               value={code}
               onChange={(e) => setCode(e.target.value)}
+              readOnly={!isAuthenticated}
             ></textarea>
           ) : (
             <pre
@@ -81,6 +106,11 @@ const Editor = ({ initialCode }) => {
             >
               <code className="language-html">{code}</code>
             </pre>
+          )}
+          {!isAuthenticated && (
+            <div className="alert alert-warning mt-3">
+              Debes iniciar sesión para usar el Editor
+            </div>
           )}
         </div>
 

@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import {
   FaCode,
   FaServer,
@@ -7,9 +7,16 @@ import {
   FaStar,
   FaChartLine,
   FaRocket,
+  FaSignInAlt,
 } from "react-icons/fa";
 
 const Home = () => {
+  // Add authentication check function from Frontend component
+  const isAuthenticated = () => {
+    const userInfo = localStorage.getItem("userInfo");
+    return userInfo && JSON.parse(userInfo) !== null;
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -162,6 +169,49 @@ const Home = () => {
         </Row>
         <br />
       </Container>
+
+      <hr className="w-100 my-5" />
+
+      {/* Sección de Registro - Solo aparece si no está autenticado */}
+      {!isAuthenticated() && (
+        <div className="w-100" style={{ backgroundColor: "#f4fefd" }}>
+          <Container className="text-center py-5">
+            <Row className="justify-content-center">
+              <Col md={8}>
+                <h2 className="mb-4">¡Únete a DevPath Hoy!</h2>
+                <p className="lead mb-4">
+                  Transforma tu futuro en desarrollo web. Regístrate gratis y
+                  comienza tu viaje de aprendizaje con acceso ilimitado a rutas
+                  de tecnología, cursos interactivos y un editor de código en
+                  línea.
+                </p>
+                <div>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    href="/registrar"
+                    className="mx-2"
+                  >
+                    <FaSignInAlt className="me-2" />
+                    Registrarse Gratis
+                  </Button>
+                  <Button
+                    variant="outline-primary"
+                    size="lg"
+                    href="/login"
+                    className="mx-2"
+                  >
+                    Iniciar Sesión
+                  </Button>
+                </div>
+                <p className="mt-3 text-muted small">
+                  Sin compromisos. Cancela en cualquier momento.
+                </p>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      )}
 
       <style>
         {`

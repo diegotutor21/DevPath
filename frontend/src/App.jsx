@@ -5,7 +5,8 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-import LoginRegister from "./auth/LoginRegister";
+import Login from "./auth/Login";
+import Registrar from "./auth/Registrar";
 import Recuperar from "./auth/Recuperar";
 import Home from "./home/Home";
 import Navbar from "./components/Navbar";
@@ -39,7 +40,7 @@ function App() {
 function MainContent() {
   const location = useLocation();
   const hideNavFooter =
-    location.pathname === "/login" || location.pathname === "/recuperar";
+    location.pathname === "/login" || location.pathname === "/registrar" || location.pathname === "/recuperar";
 
   const userInfo = localStorage.getItem("userInfo");
   const isAdmin = userInfo && JSON.parse(userInfo).rol === "admin";
@@ -50,7 +51,8 @@ function MainContent() {
       <div className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginRegister />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registrar" element={<Registrar />} />
           <Route path="/recuperar" element={<Recuperar />} />
           <Route path="/frontend" element={<Frontend />} />
           <Route path="/backend" element={<Backend />} />
