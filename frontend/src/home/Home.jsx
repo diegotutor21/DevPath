@@ -11,7 +11,6 @@ import {
 } from "react-icons/fa";
 
 const Home = () => {
-  // Add authentication check function from Frontend component
   const isAuthenticated = () => {
     const userInfo = localStorage.getItem("userInfo");
     return userInfo && JSON.parse(userInfo) !== null;

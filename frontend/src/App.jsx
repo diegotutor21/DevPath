@@ -25,6 +25,7 @@ import JS from "./pages/JS";
 import Node from "./pages/Node";
 import Express from "./pages/Express";
 import Mongo from "./pages/Mongo";
+import AI from "./pages/AI";
 import ScrollToTop from "./components/ScrollToTop"; // Importa el componente
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -67,6 +68,7 @@ function MainContent() {
           <Route path="/node" element={<Node />} />
           <Route path="/express" element={<Express />} />
           <Route path="/mongo" element={<Mongo />} />
+          <Route path="/ai" element={<AI />} />
           <Route
             path="/admin"
             element={isAdmin ? <AdminPanel /> : <Navigate to="/" />}

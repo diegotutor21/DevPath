@@ -36,7 +36,7 @@ const Backend = () => {
       description:
         "Conceptos fundamentales de Inteligencia Artificial para mejorar la inteligencia del software.",
       image: "images/IAs.jpeg",
-      link: "/conceptos-basicos-de-inteligencia-artificial",
+      link: "/ai",
     },
     {
       title: "CI/CD (Integración y despliegue continuo) ",

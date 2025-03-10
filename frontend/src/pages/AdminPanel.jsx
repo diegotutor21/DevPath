@@ -12,7 +12,11 @@ const AdminPanel = () => {
     fetch("http://localhost:3000/api/admin/usuarios")
       .then((response) => response.json())
       .then((data) => {
-        setUsers(data);
+        // Ordenar los usuarios alfabéticamente por nombre al cargarlos
+        const sortedData = [...data].sort((a, b) =>
+          a.nombre.localeCompare(b.nombre, "es", { sensitivity: "base" })
+        );
+        setUsers(sortedData);
         setLoading(false);
       })
       .catch((err) => {
